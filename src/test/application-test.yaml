@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: test
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql=true
+  datasource:
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+
+logging:
+  level:
+    org:
+      hibernate: DEBUG
+      springframework:
+        web: INFO
+        jdbc:
+          core:
+            JdbcTemplate: DEBUG
+            StatementCreatorUtils: WARN
+    root: DEBUG
+    app.seven.chew: DEBUG

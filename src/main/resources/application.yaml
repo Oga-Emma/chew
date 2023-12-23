@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/chew"
+    username: "postgres"
+    password: "postgres"
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+springdoc:
+  api-docs:
+    path: '/api-docs'
+  swagger-ui:
+    operationsSorter: method
+
+security:
+  key: "12345678"
+
+logging:
+  level:
+    hibernate: DEBUG
+    sql: DEBUG
+#    root: WARN
+    app.seven.chew: WARN
+    org:
+      springframework:
+        jdbc:
+          core:
+            JdbcTemplate: DEBUG
+            StatementCreatorUtils: WARN
