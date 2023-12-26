@@ -1,14 +1,13 @@
 package app.seven.chew.auth
 
 import app.seven.chew.BaseIntegrationText
-import app.seven.chew.auth.model.AuthUser
-import app.seven.chew.user.model.User
+import app.seven.chew.features.auth.model.AuthUser
+import app.seven.chew.features.auth.repository.AuthUserRepository
+import app.seven.chew.features.auth.service.AuthService
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.nulls.shouldNotBeNull
-import io.kotest.matchers.should
 import org.junit.jupiter.api.Test
 
-import org.junit.jupiter.api.Assertions.*
 import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDate
 import kotlin.jvm.optionals.getOrNull

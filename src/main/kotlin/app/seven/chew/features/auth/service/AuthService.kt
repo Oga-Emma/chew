@@ -1,19 +1,14 @@
-package app.seven.chew.auth
+package app.seven.chew.features.auth.service
 
-import app.seven.chew.auth.model.AuthUser
-import app.seven.chew.auth.model.Session
-import app.seven.chew.auth.model.SignupRequest
+import app.seven.chew.features.auth.model.AuthUser
+import app.seven.chew.features.auth.model.Session
+import app.seven.chew.features.auth.repository.AuthUserRepository
 import app.seven.chew.config.TokenHelper
 import app.seven.chew.exception.InvalidCredentialException
-import app.seven.chew.exception.InvalidJwtTokenException
-import app.seven.chew.exception.NotFoundException
-import app.seven.chew.user.UserRepository
-import app.seven.chew.user.model.User
+import app.seven.chew.features.user.model.User
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.RestController
 import java.time.temporal.ChronoUnit
-import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
 @Service

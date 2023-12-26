@@ -1,11 +1,12 @@
-package app.seven.chew.auth
+package app.seven.chew.features.auth.business
 
-import app.seven.chew.auth.mapper.AuthResponseMapper
-import app.seven.chew.auth.mapper.AuthUserMapper
-import app.seven.chew.auth.model.AuthResponse
-import app.seven.chew.auth.model.AuthUser
-import app.seven.chew.auth.model.LoginRequest
-import app.seven.chew.auth.model.SignupRequest
+import app.seven.chew.features.auth.mapper.AuthResponseMapper
+import app.seven.chew.features.auth.mapper.AuthUserMapper
+import app.seven.chew.features.auth.model.AuthResponse
+import app.seven.chew.features.auth.model.AuthUser
+import app.seven.chew.features.auth.model.LoginRequest
+import app.seven.chew.features.auth.model.SignupRequest
+import app.seven.chew.features.auth.service.AuthService
 import app.seven.chew.exception.EmailInUseException
 import app.seven.chew.exception.InvalidCredentialException
 import org.springframework.stereotype.Component

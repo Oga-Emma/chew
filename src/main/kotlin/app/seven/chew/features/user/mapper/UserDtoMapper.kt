@@ -1,7 +1,7 @@
-package app.seven.chew.user
+package app.seven.chew.features.user.mapper
 
-import app.seven.chew.user.model.User
-import app.seven.chew.user.model.UserDto
+import app.seven.chew.features.user.model.User
+import app.seven.chew.features.user.model.UserDto
 import org.springframework.stereotype.Component
 
 @Component

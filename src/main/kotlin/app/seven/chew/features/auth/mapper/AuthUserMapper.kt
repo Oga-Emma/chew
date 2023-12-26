@@ -1,10 +1,8 @@
-package app.seven.chew.auth.mapper
+package app.seven.chew.features.auth.mapper
 
-import app.seven.chew.auth.model.AuthResponse
-import app.seven.chew.auth.model.AuthUser
-import app.seven.chew.auth.model.Session
-import app.seven.chew.auth.model.SignupRequest
-import app.seven.chew.user.model.User
+import app.seven.chew.features.auth.model.AuthUser
+import app.seven.chew.features.auth.model.SignupRequest
+import app.seven.chew.features.user.model.User
 import org.springframework.stereotype.Component
 
 @Component

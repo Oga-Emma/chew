@@ -1,6 +1,6 @@
-package app.seven.chew.user
+package app.seven.chew.features.user.repository
 
-import app.seven.chew.user.model.User
+import app.seven.chew.features.user.model.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import java.util.UUID

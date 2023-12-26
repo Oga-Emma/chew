@@ -1,4 +1,4 @@
-package app.seven.chew.auth.model
+package app.seven.chew.features.auth.model
 
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.Max

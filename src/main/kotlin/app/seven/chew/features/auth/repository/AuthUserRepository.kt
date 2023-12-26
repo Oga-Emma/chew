@@ -1,7 +1,6 @@
-package app.seven.chew.auth
+package app.seven.chew.features.auth.repository
 
-import app.seven.chew.auth.model.AuthUser
-import app.seven.chew.user.model.User
+import app.seven.chew.features.auth.model.AuthUser
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import java.util.UUID

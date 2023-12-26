@@ -1,4 +1,4 @@
-package app.seven.chew.user.model
+package app.seven.chew.features.user.model
 
 import jakarta.persistence.*
 import java.time.LocalDate

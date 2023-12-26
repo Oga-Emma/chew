@@ -24,7 +24,7 @@ logging:
     hibernate: DEBUG
     sql: DEBUG
 #    root: WARN
-    app.seven.chew: WARN
+    app.seven.chew: DEBUG
     org:
       springframework:
         jdbc:

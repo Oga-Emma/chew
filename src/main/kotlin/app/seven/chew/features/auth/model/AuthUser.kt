@@ -1,6 +1,6 @@
-package app.seven.chew.auth.model
+package app.seven.chew.features.auth.model
 
-import app.seven.chew.user.model.User
+import app.seven.chew.features.user.model.User
 import jakarta.persistence.*
 import java.util.*
 

@@ -1,8 +1,9 @@
-package app.seven.chew.auth
+package app.seven.chew.features.user
 
-import app.seven.chew.auth.model.AuthResponse
-import app.seven.chew.auth.model.LoginRequest
-import app.seven.chew.auth.model.SignupRequest
+import app.seven.chew.features.auth.business.AuthBusiness
+import app.seven.chew.features.auth.model.AuthResponse
+import app.seven.chew.features.auth.model.LoginRequest
+import app.seven.chew.features.auth.model.SignupRequest
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
@@ -18,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/v1/auth")
-@Tag(name = "Authentication API", description = "Endpoints for authenticating users")
-class AuthController(val authBusiness: AuthBusiness) {
+@RequestMapping("/api/profile")
+@Tag(name = "User API", description = "Endpoints for user management")
+class UserController(val authBusiness: AuthBusiness) {
 
     @Operation(summary = "Login with email and password")
     @ApiResponses(value = [
@@ -43,7 +44,7 @@ class AuthController(val authBusiness: AuthBusiness) {
         ]),
         ApiResponse(responseCode = "400", description = "Bad request", content = [Content()])]
     )
-    @PostMapping("/signup")
+    @PostMapping("/register")
     fun signup(@RequestBody @Valid request: SignupRequest): ResponseEntity<*> {
         return ResponseEntity.ok("")
     }

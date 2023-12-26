@@ -1,6 +1,6 @@
-package app.seven.chew.user.model
+package app.seven.chew.features.user.model
 
-import app.seven.chew.auth.model.AuthUser
+import app.seven.chew.features.auth.model.AuthUser
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id

@@ -1,8 +1,6 @@
 package app.seven.chew.config
 
-import app.seven.chew.auth.AuthService
-import app.seven.chew.auth.model.AuthUser
-import app.seven.chew.user.model.User
+import app.seven.chew.features.user.model.User
 import org.springframework.security.oauth2.jwt.*
 import org.springframework.stereotype.Component
 import java.time.Instant

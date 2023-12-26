@@ -1,13 +1,14 @@
 package app.seven.chew.auth
 
-import app.seven.chew.auth.mapper.AuthResponseMapper
-import app.seven.chew.auth.mapper.AuthUserMapper
-import app.seven.chew.auth.model.AuthResponse
-import app.seven.chew.auth.model.AuthUser
-import app.seven.chew.auth.model.LoginRequest
-import app.seven.chew.auth.model.Session
+import app.seven.chew.features.auth.business.AuthBusiness
+import app.seven.chew.features.auth.mapper.AuthResponseMapper
+import app.seven.chew.features.auth.mapper.AuthUserMapper
+import app.seven.chew.features.auth.model.AuthResponse
+import app.seven.chew.features.auth.model.AuthUser
+import app.seven.chew.features.auth.model.LoginRequest
+import app.seven.chew.features.auth.model.Session
+import app.seven.chew.features.auth.service.AuthService
 import app.seven.chew.exception.InvalidCredentialException
-import app.seven.chew.user.model.User
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.mockk.every

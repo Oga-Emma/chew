@@ -1,6 +1,6 @@
 package app.seven.chew.config
 
-import app.seven.chew.auth.AuthService
+import app.seven.chew.features.auth.service.AuthService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -18,32 +18,40 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig (
+class SecurityConfig(
     private val authService: AuthService,
 ) {
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         // Define public and private routes
-        http.authorizeHttpRequests()
-            .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/register").permitAll()
-            .requestMatchers("/api/**").authenticated()
-            .anyRequest().permitAll() // In case you have a frontend
+        http
+            .authorizeHttpRequests { authz ->
+                authz
+                    .requestMatchers(HttpMethod.POST, "/api/auth/*").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/meals").permitAll()
+                    .requestMatchers("/api/**").authenticated()
+                    .anyRequest().permitAll() // In case you have a frontend
+            }
 
         // Configure JWT
-        http.oauth2ResourceServer().jwt()
-        http.authenticationManager { auth ->
-            val jwt = auth as BearerTokenAuthenticationToken
+        http.oauth2ResourceServer { oauth -> oauth.jwt { } }
+
+        http.authenticationManager { authManager ->
+            val jwt = authManager as BearerTokenAuthenticationToken
             val user = authService.getUserFromToken(jwt.token) ?: throw InvalidBearerTokenException("Invalid token")
             UsernamePasswordAuthenticationToken(user, "", listOf(SimpleGrantedAuthority("USER")))
         }
 
         // Other configuration
-        http.cors()
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        http.csrf().disable()
-        http.headers().frameOptions().disable()
-        http.headers().xssProtection().disable()
+        http.cors {}
+        http.sessionManagement { sessionManager ->
+            sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        }
+        http.csrf { csrf -> csrf.disable() }
+        http.headers { headers ->
+            headers.frameOptions { options -> options.disable() }
+            headers.xssProtection { pro -> pro.disable() }
+        }
 
         return http.build()
     }
