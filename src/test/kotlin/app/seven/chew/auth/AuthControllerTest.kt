@@ -1,9 +1,8 @@
 package app.seven.chew.auth
 
-import app.seven.chew.features.auth.business.AuthBusiness
-import app.seven.chew.features.auth.model.AuthResponse
-import app.seven.chew.features.auth.model.LoginRequest
-import app.seven.chew.features.auth.AuthController
+import app.seven.chew.auth.business.AuthBusiness
+import app.seven.chew.auth.model.AuthResponse
+import app.seven.chew.auth.model.LoginRequest
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
