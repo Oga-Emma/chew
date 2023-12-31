@@ -1,5 +1,6 @@
 package app.seven.chew
 
+import app.seven.chew.user.ChewApplication
 import org.springframework.boot.fromApplication
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection
