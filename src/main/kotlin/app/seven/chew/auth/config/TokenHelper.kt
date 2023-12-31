@@ -1,6 +1,7 @@
 package app.seven.chew.auth.config
 
-import app.seven.chew.auth.model.User
+import app.seven.chew.auth.model.entity.AuthUser
+import app.seven.chew.auth.model.entity.User
 import org.springframework.security.oauth2.jwt.*
 import org.springframework.stereotype.Component
 import java.time.Instant
@@ -17,17 +18,16 @@ class TokenHelper (
         val claims = JwtClaimsSet.builder()
             .issuedAt(Instant.now())
             .expiresAt(Instant.now().plus(ttl, ChronoUnit.DAYS))
-            .subject(user.name)
-            .claim("userId", user.id)
+            .subject(user.id.toString())
             .build()
 
         return jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claims)).tokenValue
     }
 
-    fun parseToken(token: String, resolveUser: (userId: UUID) -> User?): User? {
+    fun parseToken(token: String, resolveUser: (userId: UUID) -> AuthUser?): AuthUser? {
         return try {
             val jwt = jwtDecoder.decode(token)
-            val userId = UUID.fromString(jwt.claims["userId"] as String)
+            val userId = UUID.fromString(jwt.subject as String)
             resolveUser(userId)
         } catch (e: Exception) {
             null

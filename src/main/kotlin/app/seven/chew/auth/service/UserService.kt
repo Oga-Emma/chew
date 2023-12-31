@@ -1,7 +1,7 @@
 package app.seven.chew.auth.service
 
 import app.seven.chew.auth.exception.NotFoundException
-import app.seven.chew.auth.model.User
+import app.seven.chew.auth.model.entity.User
 import app.seven.chew.auth.repository.UserRepository
 import org.springframework.stereotype.Service
 import java.util.*

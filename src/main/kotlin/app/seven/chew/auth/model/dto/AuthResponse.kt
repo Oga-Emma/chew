@@ -1,4 +1,6 @@
-package app.seven.chew.auth.model
+package app.seven.chew.auth.model.dto
+
+import app.seven.chew.auth.model.entity.User
 
 data class AuthResponse (
     val user: User,

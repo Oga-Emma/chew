@@ -1,4 +1,4 @@
-package app.seven.chew.auth.model
+package app.seven.chew.auth.model.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

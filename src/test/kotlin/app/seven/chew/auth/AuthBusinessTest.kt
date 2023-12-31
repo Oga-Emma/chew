@@ -3,10 +3,10 @@ package app.seven.chew.auth
 import app.seven.chew.auth.business.AuthBusiness
 import app.seven.chew.auth.mapper.AuthResponseMapper
 import app.seven.chew.auth.mapper.AuthUserMapper
-import app.seven.chew.auth.model.AuthResponse
-import app.seven.chew.auth.model.AuthUser
-import app.seven.chew.auth.model.LoginRequest
-import app.seven.chew.auth.model.Session
+import app.seven.chew.auth.model.dto.AuthResponse
+import app.seven.chew.auth.model.entity.AuthUser
+import app.seven.chew.auth.model.dto.LoginRequest
+import app.seven.chew.auth.model.dto.Session
 import app.seven.chew.auth.service.AuthService
 import app.seven.chew.auth.exception.InvalidCredentialException
 import io.kotest.assertions.throwables.shouldThrow
@@ -35,7 +35,7 @@ class AuthBusinessTest {
             val authResponse: AuthResponse = mockk()
 
             every { authService.getUserWithEmail(request.email) } returns user
-            justRun { authService.validateForLogin(user, request.password) }
+            justRun { authService.passwordMatch(user, request.password) }
             every { authService.createSession(user) } returns session
             every { authResponseMapper.from(user, session) } returns authResponse
 
@@ -55,7 +55,7 @@ class AuthBusinessTest {
             val authResponse: AuthResponse = mockk()
 
             every { authService.getUserWithEmail(request.email) } returns user
-            justRun { authService.validateForLogin(user, request.password) }
+            justRun { authService.passwordMatch(user, request.password) }
             every { authService.createSession(user) } returns session
             every { authResponseMapper.from(user, session) } returns authResponse
 
@@ -90,7 +90,7 @@ class AuthBusinessTest {
             val authResponse: AuthResponse = mockk()
 
             every { authService.getUserWithEmail(request.email) } returns user
-            justRun { authService.validateForLogin(user, request.password) }
+            justRun { authService.passwordMatch(user, request.password) }
             every { authService.createSession(user) } returns session
             every { authResponseMapper.from(user, session) } returns authResponse
 
@@ -98,7 +98,7 @@ class AuthBusinessTest {
             val actual = authBusiness.login(request)
 
             //then
-            verify(exactly = 1) { authService.validateForLogin(user, request.password) }
+            verify(exactly = 1) { authService.passwordMatch(user, request.password) }
             actual.shouldBe(authResponse)
         }
 
@@ -109,13 +109,13 @@ class AuthBusinessTest {
             val user: AuthUser = mockk()
 
             every { authService.getUserWithEmail(request.email) } returns user
-            every { authService.validateForLogin(user, request.password) } throws InvalidCredentialException()
+            every { authService.passwordMatch(user, request.password) } throws InvalidCredentialException()
 
             // when
             val exception = shouldThrow<InvalidCredentialException> { authBusiness.login(request) }
 
             //then
-            verify(exactly = 1) { authService.validateForLogin(user, request.password) }
+            verify(exactly = 1) { authService.passwordMatch(user, request.password) }
             exception.message.shouldBe("Invalid credential")
         }
 
@@ -128,7 +128,7 @@ class AuthBusinessTest {
             val authResponse: AuthResponse = mockk()
 
             every { authService.getUserWithEmail(request.email) } returns user
-            justRun { authService.validateForLogin(user, request.password) }
+            justRun { authService.passwordMatch(user, request.password) }
             every { authService.createSession(user) } returns session
             every { authResponseMapper.from(user, session) } returns authResponse
 

@@ -1,4 +1,4 @@
-package app.seven.chew.auth.model
+package app.seven.chew.auth.model.dto
 
 import java.time.LocalDate
 import java.util.UUID

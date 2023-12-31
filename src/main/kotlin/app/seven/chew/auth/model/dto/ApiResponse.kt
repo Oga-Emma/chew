@@ -1,4 +1,4 @@
-package app.seven.chew.auth.model
+package app.seven.chew.auth.model.dto
 
 sealed class ApiResponse<T> (
     val success: Boolean,

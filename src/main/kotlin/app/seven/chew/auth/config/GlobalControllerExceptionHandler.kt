@@ -1,7 +1,7 @@
 package app.seven.chew.auth.config
 
 import app.seven.chew.auth.exception.InvalidCredentialException
-import app.seven.chew.auth.model.ApiResponse
+import app.seven.chew.auth.model.dto.ApiResponse
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
 import org.springframework.core.convert.ConversionFailedException

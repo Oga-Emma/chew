@@ -2,9 +2,9 @@ package app.seven.chew.auth.service
 
 import app.seven.chew.BaseIntegrationTest
 import app.seven.chew.auth.config.TokenHelper
-import app.seven.chew.auth.model.AuthUser
+import app.seven.chew.auth.model.entity.AuthUser
 import app.seven.chew.auth.repository.AuthUserRepository
-import app.seven.chew.auth.model.User
+import app.seven.chew.auth.model.entity.User
 import io.kotest.matchers.equality.shouldBeEqualToIgnoringFields
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.nulls.shouldBeNull

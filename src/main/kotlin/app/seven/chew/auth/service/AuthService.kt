@@ -1,14 +1,13 @@
 package app.seven.chew.auth.service
 
-import app.seven.chew.auth.model.AuthUser
-import app.seven.chew.auth.model.Session
+import app.seven.chew.auth.model.entity.AuthUser
+import app.seven.chew.auth.model.dto.Session
 import app.seven.chew.auth.repository.AuthUserRepository
 import app.seven.chew.auth.config.TokenHelper
-import app.seven.chew.auth.exception.InvalidCredentialException
-import app.seven.chew.auth.model.User
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.time.temporal.ChronoUnit
+import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
 @Service
@@ -25,13 +24,17 @@ class AuthService(
         return authUserRepository.findByUser_Email(email)
     }
 
-    fun getUserFromToken(token: String?): User? {
+    fun getUserById(userId: UUID): AuthUser? {
+        return authUserRepository.findById(userId).getOrNull()
+    }
+
+    fun getUserFromToken(token: String?): AuthUser? {
         if (token.isNullOrBlank()) {
             return null
         }
 
         return tokenHelper.parseToken(token) { userId ->
-            authUserRepository.findById(userId).getOrNull()?.user
+            authUserRepository.findById(userId).getOrNull()
         }
     }
 
@@ -49,13 +52,15 @@ class AuthService(
        return passwordEncoder.encode(password)
     }
 
-    fun validateForLogin(authUser: AuthUser, password: String) {
-        if (!passwordEncoder.matches(password, authUser.password)) {
-            throw InvalidCredentialException()
-        }
+    fun passwordMatch(authUser: AuthUser, password: String): Boolean {
+        return passwordEncoder.matches(password, authUser.password)
     }
 
-    private fun save(authUser: AuthUser): AuthUser {
+    fun getUserByRefreshToken(userId: UUID, refreshToken: String): AuthUser? {
+        return authUserRepository.findByIdAndRefreshToken(userId, refreshToken)
+    }
+
+    fun save(authUser: AuthUser): AuthUser {
         return authUserRepository.save(authUser)
     }
 

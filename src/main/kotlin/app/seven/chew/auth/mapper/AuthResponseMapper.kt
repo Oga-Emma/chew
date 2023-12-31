@@ -1,8 +1,8 @@
 package app.seven.chew.auth.mapper
 
-import app.seven.chew.auth.model.AuthResponse
-import app.seven.chew.auth.model.AuthUser
-import app.seven.chew.auth.model.Session
+import app.seven.chew.auth.model.dto.AuthResponse
+import app.seven.chew.auth.model.entity.AuthUser
+import app.seven.chew.auth.model.dto.Session
 import org.springframework.stereotype.Component
 
 @Component
