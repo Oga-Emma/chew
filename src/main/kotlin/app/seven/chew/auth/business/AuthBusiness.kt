@@ -6,7 +6,9 @@ import app.seven.chew.auth.mapper.AuthUserMapper
 import app.seven.chew.auth.model.dto.AuthResponse
 import app.seven.chew.auth.model.dto.SignupRequest
 import app.seven.chew.auth.service.AuthService
+import app.seven.chew.auth.service.EventPublisherService
 import app.seven.chew.auth.service.NotificationService
+import app.seven.chew.auth.utils.Constants
 import org.springframework.stereotype.Component
 
 @Component
@@ -14,7 +16,8 @@ class AuthBusiness(
     val authService: AuthService,
     val notificationService: NotificationService,
     val authResponseMapper: AuthResponseMapper,
-    val authUserMapper: AuthUserMapper
+    val authUserMapper: AuthUserMapper,
+    val eventPublisherService: EventPublisherService
 ) {
 
     fun createAccount(request: SignupRequest): AuthResponse {
@@ -22,12 +25,12 @@ class AuthBusiness(
             throw EmailInUseException()
         }
 
-        val role = "USER"
         val encodedPassword = authService.encryptPassword(request.password)
-        val createUserData = authUserMapper.from(request, encodedPassword = encodedPassword, role)
+        val createUserData = authUserMapper.from(request, encodedPassword, Constants.ROLE_USER)
         val authUser = authService.createAccount(createUserData)
-
         val session = authService.createSession(authUser)
+
+        eventPublisherService.publishUserCreatedEvent(authUser)
         notificationService.newSignup(authUser)
 
         return authResponseMapper.from(authUser, session)

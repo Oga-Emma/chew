@@ -16,11 +16,11 @@ springdoc:
 
 logging:
   level:
-    hibernate: ERROR
-    sql: ERROR
+    hibernate: DEBUG
+    sql: DEBUG
 #    root: WARN
-    app.seven.chew: ERROR
-    org: ERROR
+    app.seven.chew: DEBUG
+    org: INFO
 
 app:
   rabbitmq:
@@ -29,6 +29,7 @@ app:
         profile-updated: "profile-updated-event"
       out:
         account-created: "account-created-event"
+    save-messages: true
 
 eureka:
   client:

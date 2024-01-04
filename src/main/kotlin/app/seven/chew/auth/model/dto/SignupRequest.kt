@@ -13,6 +13,7 @@ data class SignupRequest(
     val name: String,
 
     @Past (message = "Invalid date of birth")
+//    @IsAfter(current = "20-03-2010")
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     val dob: LocalDate,
 

@@ -7,6 +7,7 @@ import app.seven.chew.auth.model.dto.AuthResponse
 import app.seven.chew.auth.model.dto.SignupRequest
 import app.seven.chew.auth.model.entity.AuthUser
 import app.seven.chew.auth.service.AuthService
+import app.seven.chew.auth.service.EventPublisherService
 import app.seven.chew.auth.service.NotificationService
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.equals.shouldBeEqual
@@ -21,13 +22,15 @@ class AuthBusinessTest {
     private val notificationService: NotificationService = mockk()
     private val authResponseMapper: AuthResponseMapper = mockk()
     private val authUserMapper: AuthUserMapper = mockk()
+    private val eventPublisherService: EventPublisherService = mockk()
 
     private var authBusiness: AuthBusiness =
         AuthBusiness(
             authService,
             notificationService,
             authResponseMapper,
-            authUserMapper
+            authUserMapper,
+            eventPublisherService
         )
 
     @Nested
@@ -50,6 +53,7 @@ class AuthBusinessTest {
             every { authUserMapper.from(any(), any(), any()) } returns user
             every { authService.createAccount(any()) } returns user
             every { authService.createSession(any()) } returns mockk()
+            justRun { eventPublisherService.publishUserCreatedEvent(any()) }
             justRun { notificationService.newSignup(any()) }
             every { authResponseMapper.from(any(), any()) } returns mockk()
 
@@ -91,6 +95,7 @@ class AuthBusinessTest {
             every { authUserMapper.from(any(), any(), any()) } returns user
             every { authService.createAccount(any()) } returns user
             every { authService.createSession(any()) } returns mockk()
+            justRun { eventPublisherService.publishUserCreatedEvent(any()) }
             justRun { notificationService.newSignup(any()) }
             every { authResponseMapper.from(any(), any()) } returns expected
 

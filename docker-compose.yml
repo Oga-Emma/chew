@@ -11,6 +11,13 @@ services:
       - '6432:5432'
     volumes:
       - db:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
 volumes:
   db:
     driver: local

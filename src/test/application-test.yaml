@@ -28,6 +28,11 @@ spring:
     password: rabbitmq
     port: 5672
 
+app:
+  rabbitmq:
+    events:
+    save-messages: false
+
 eureka:
   client:
     enabled: false
