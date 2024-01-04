@@ -21,13 +21,13 @@ class AuthControllerTest {
         val request = mockk<SignupRequest>()
         val response = mockk<AuthResponse>()
 
-        every { authBusiness.register(request) } returns response
+        every { authBusiness.createAccount(request) } returns response
 
         //when
         val result = authController.signup(request)
 
         //then
-        verify { exactly(1); authBusiness.register(request) }
+        verify { exactly(1); authBusiness.createAccount(request) }
         result.shouldBe(ResponseEntity.ok(response))
     }
 }

@@ -2,7 +2,6 @@ package app.seven.chew.auth.web
 
 import app.seven.chew.auth.business.AuthBusiness
 import app.seven.chew.auth.model.dto.*
-import io.swagger.v3.oas.annotations.Hidden
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
@@ -12,11 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
-import org.springframework.security.core.annotation.AuthenticationPrincipal
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.*
-import java.security.Principal
-import java.util.UUID
 
 @RestController
 @RequestMapping("/api/auth")
@@ -58,7 +53,7 @@ class AuthController(val authBusiness: AuthBusiness) {
     @ApiResponses(
         value = [
             ApiResponse(
-                responseCode = "200", description = "Create a new user account, returns accessToken", content = [
+                responseCode = "200", description = "Create a new user account, returns user and session information", content = [
                     (Content(
                         mediaType = "application/json", array = (
                                 ArraySchema(schema = Schema(implementation = AuthResponse::class)))
@@ -69,7 +64,7 @@ class AuthController(val authBusiness: AuthBusiness) {
     )
     @PostMapping("/register")
     fun signup(@RequestBody @Valid request: SignupRequest): ResponseEntity<*> {
-        return ResponseEntity.ok(authBusiness.register(request))
+        return ResponseEntity.ok(authBusiness.createAccount(request))
     }
 
 //
