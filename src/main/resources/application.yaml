@@ -1,39 +1,12 @@
 spring:
   application:
-    name: chew-auth
-  datasource:
-    url: ${DATABASE_SOURCE}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    name: chew-auth-service
   jpa:
     hibernate:
       ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-  rabbitmq:
-    host: ${RABBITMQ_HOST}
-    username: ${RABBITMQ_USERNAME}
-    password: ${RABBITMQ_PASSWORD}
-    port: 5672
-#        ...
-#        spring.rabbitmq.host=localhost # RabbitMQ host.
-#        spring.rabbitmq.password= # Login to authenticate against the broker.
-#        spring.rabbitmq.port=5672 # RabbitMQ port.
-#        spring.rabbitmq.username= # Login user to authenticate to the broker.
-#        ...
-server:
-  port: 8081
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      default-zone: http://localhost:8761/eureka
-    healthcheck:
-      enabled: true
-#  instance:
-#    preferIpAddress: true
 
 springdoc:
   api-docs:
@@ -41,16 +14,13 @@ springdoc:
   swagger-ui:
     operationsSorter: method
 
-security:
-  key: "12345678"
-
 logging:
   level:
-    hibernate: DEBUG
-    sql: DEBUG
+    hibernate: ERROR
+    sql: ERROR
 #    root: WARN
-    app.seven.chew: DEBUG
-    org: DEBUG
+    app.seven.chew: ERROR
+    org: ERROR
 
 app:
   rabbitmq:
@@ -59,3 +29,10 @@ app:
         profile-updated: "profile-updated-event"
       out:
         account-created: "account-created-event"
+
+eureka:
+  client:
+    enabled: false
+
+security:
+  key: "my-32-character-ultra-secure-and-ultra-long-secret"

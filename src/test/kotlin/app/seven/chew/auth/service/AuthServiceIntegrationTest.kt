@@ -1,26 +1,33 @@
 package app.seven.chew.auth.service
 
-import app.seven.chew.BaseIntegrationTest
 import app.seven.chew.auth.config.TokenHelper
 import app.seven.chew.auth.model.entity.AuthUser
-import app.seven.chew.auth.repository.AuthUserRepository
 import app.seven.chew.auth.model.entity.User
+import app.seven.chew.auth.repository.AuthUserRepository
+import app.seven.chew.auth.utils.BaseIntegrationTest
+import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.matchers.equality.shouldBeEqualToIgnoringFields
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.nulls.shouldNotBeNull
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.crypto.password.PasswordEncoder
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 import kotlin.jvm.optionals.getOrNull
 
 class AuthServiceIntegrationTest(
     @Autowired val authUserRepository: AuthUserRepository,
     @Autowired val authService: AuthService,
-    @Autowired val tokenHelper: TokenHelper,
-    @Autowired val passwordEncoder: PasswordEncoder
+    @Autowired val tokenHelper: TokenHelper
 ) : BaseIntegrationTest() {
+
+    @BeforeEach
+    fun setUp() {
+
+        authUserRepository.deleteAll()
+    }
 
     @Test
     fun `testCreateAccount - should save data to db`() {
@@ -51,7 +58,7 @@ class AuthServiceIntegrationTest(
         //given
         val ourUser = AuthUser(
             password = "1234", user = User(
-                email = "email1@mail.com", phone = "1234567",
+                email = "email4@mail.com", phone = "1234567",
                 name = "Seven apps", dob = LocalDate.now(), role = "user"
             )
         )
@@ -69,12 +76,12 @@ class AuthServiceIntegrationTest(
         )
 
         //when
-        val authUser = authService.getUserWithEmail(ourUser.user.email)
+        val expected = authService.getUserWithEmail(ourUser.user.email)
 
         //then
-        authUser.shouldNotBeNull()
-        authUser.shouldBeEqualToIgnoringFields(ourUser, AuthUser::id, AuthUser::user)
-        authUser.user.shouldBeEqualToIgnoringFields(ourUser.user, User::id, User::role, User::authUser)
+        expected.shouldNotBeNull()
+        expected.shouldBeEqualToIgnoringFields(ourUser, AuthUser::id, AuthUser::user)
+        expected.user.shouldBeEqualToIgnoringFields(ourUser.user, User::id, User::role, User::authUser)
     }
 
     @Test
@@ -98,13 +105,13 @@ class AuthServiceIntegrationTest(
         )
 
         //when
-        val authUser = authService.getUserWithEmail("unknown@email.com")
+        val expected = authService.getUserWithEmail("unknown@email.com")
 
         //then
-        authUser.shouldBeNull()
+        expected.shouldBeNull()
     }
 
-   /* @Test
+    @Test
     fun `getUserFromToken - when pass`() {
         //given
         val savedUser = authUserRepository.save(
@@ -136,12 +143,13 @@ class AuthServiceIntegrationTest(
         )
 
         //when
-        val user = authService.getUserFromToken(token)
+        val expected: AuthUser? = authService.getUserFromToken(token)
 
         //then
-        user.shouldNotBeNull()
-        user.shouldBeEqualToIgnoringFields(savedUser.user, User::role, User::authUser)
-    }*/
+        expected.shouldNotBeNull()
+        expected.user.shouldBeEqualToIgnoringFields(savedUser.user, User::role, User::authUser)
+    }
+
 //
 //    @Test
 //    fun createSession() {

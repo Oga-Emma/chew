@@ -5,9 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 
 @ConfigurationProperties("app")
 class AppConfig {
-    @Value("\${rabbitmq.events.in.profile-updated}")
+    @Value("\${app.rabbitmq.events.in.profile-updated}")
     lateinit var profileUpdatedEvent: String
 
-    @Value("\${rabbitmq.events.out.account-created}")
+    @Value("\${app.rabbitmq.events.out.account-created}")
     lateinit var accountCreatedEvent: String
 }

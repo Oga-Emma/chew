@@ -1,5 +1,6 @@
 package app.seven.chew.auth.model.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
@@ -34,6 +35,7 @@ data class User (
     @Column(nullable = false)
     var role: String,
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = [CascadeType.ALL])
     @PrimaryKeyJoinColumn
     var authUser: AuthUser? = null

@@ -7,8 +7,8 @@ import org.springframework.boot.runApplication
 
 @SpringBootApplication
 @EnableConfigurationProperties(AppConfig::class)
-class ChewApplication
+class ChewAuthApplication
 
 fun main(args: Array<String>) {
-	runApplication<ChewApplication>(*args)
+	runApplication<ChewAuthApplication>(*args)
 }

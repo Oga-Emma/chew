@@ -7,6 +7,6 @@ import java.util.UUID
 
 @Repository
 interface AuthUserRepository: JpaRepository<AuthUser, UUID> {
-    fun findByUser_Email(user_email: String): AuthUser?
+    fun findByUserEmail(userEmail: String): AuthUser?
     fun findByIdAndRefreshToken(id: UUID, refreshToken: String): AuthUser?
 }

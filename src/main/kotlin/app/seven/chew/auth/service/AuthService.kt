@@ -21,7 +21,7 @@ class AuthService(
     }
 
     fun getUserWithEmail(email: String): AuthUser? {
-        return authUserRepository.findByUser_Email(email)
+        return authUserRepository.findByUserEmail(email)
     }
 
     fun getUserById(userId: UUID): AuthUser? {

@@ -49,7 +49,7 @@ class AuthBusiness(
 
         val session = this.createSession(authUser)
 
-        notificationService.newSignup(authUser.user)
+//        notificationService.newSignup(authUser.user)
         return session
     }
 
@@ -62,7 +62,7 @@ class AuthBusiness(
         }
 
         val session = this.createSession(authUser)
-        notificationService.newLogin(authUser.user)
+//        notificationService.newLogin(authUser.user)
 
         return session
     }

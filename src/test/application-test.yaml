@@ -10,16 +10,31 @@ spring:
         format_sql=true
   datasource:
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+  docker:
+    compose:
+      skip.in-tests: false
 
-logging:
-  level:
-    org:
-      hibernate: DEBUG
-      springframework:
-        web: INFO
-        jdbc:
-          core:
-            JdbcTemplate: DEBUG
-            StatementCreatorUtils: WARN
-    root: DEBUG
-    app.seven.chew: DEBUG
+  cloud:
+    discovery:
+      enabled: false
+    config:
+      enabled: false
+      discovery:
+        enabled: false
+
+  rabbitmq:
+    host: localhost
+    username: rabbitmq
+    password: rabbitmq
+    port: 5672
+
+eureka:
+  client:
+    enabled: false
+
+#        ...
+#        spring.rabbitmq.host=localhost # RabbitMQ host.
+#        spring.rabbitmq.password= # Login to authenticate against the broker.
+#        spring.rabbitmq.port=5672 # RabbitMQ port.
+#        spring.rabbitmq.username= # Login user to authenticate to the broker.
+#        ...

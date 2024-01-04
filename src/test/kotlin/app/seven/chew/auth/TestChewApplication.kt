@@ -1,6 +1,5 @@
-package app.seven.chew
+package app.seven.chew.auth
 
-import app.seven.chew.auth.ChewApplication
 import org.springframework.boot.fromApplication
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection
@@ -21,5 +20,5 @@ class TestChewApplication {
 }
 
 fun main(args: Array<String>) {
-	fromApplication<ChewApplication>().with(TestChewApplication::class).run(*args)
+	fromApplication<ChewAuthApplication>().with(TestChewApplication::class).run(*args)
 }
