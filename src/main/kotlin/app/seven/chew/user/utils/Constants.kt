@@ -2,8 +2,15 @@ package app.seven.chew.user.utils
 
 class Constants {
     companion object {
-        const val PROFILE_UPDATED_EVENT = "profile-updated-event"
-        const val ACCOUNT_CREATED_EVENT = "account-created-event"
+        const val USER_CREATED_QUEUE = "chew-user-created-queue"
+        const val USER_UPDATED_QUEUE = "chew-user-updated-queue"
+        const val CHEW_USER_CREATED_MESSAGE_TOPIC = "chew-user-created-topic"
+        const val CHEW_USER_UPDATED_MESSAGE_TOPIC = "chew-user-updated-topic"
+        const val CHEW_USER_CREATED_ROUTING_KEY = "chew.user.created"
+        const val CHEW_USER_UPDATED_ROUTING_KEY = "chew.user.updated"
+//        const val CHEW_TOPIC_ROUTING_KEY = "chew.user.#"
+
+        const val ROLE_USER = "USER"
     }
 
 

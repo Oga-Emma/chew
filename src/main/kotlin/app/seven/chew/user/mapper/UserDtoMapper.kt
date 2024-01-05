@@ -1,6 +1,6 @@
 package app.seven.chew.user.mapper
 
-import app.seven.chew.user.entity.UserProfile
+import app.seven.chew.user.model.entity.UserProfile
 import app.seven.chew.user.model.UserDto
 import org.springframework.stereotype.Component
 

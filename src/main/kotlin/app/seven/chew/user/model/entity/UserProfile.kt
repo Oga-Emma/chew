@@ -1,4 +1,4 @@
-package app.seven.chew.user.entity
+package app.seven.chew.user.model.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -12,7 +12,7 @@ import java.time.LocalDate
 import java.util.UUID
 
 @Entity
-@Table(name = "user_profile")
+@Table(name = "user_profiles")
 data class UserProfile (
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -29,10 +29,4 @@ data class UserProfile (
 
     @Column(nullable = false)
     var email: String,
-
-    @Column(nullable = false)
-    var role: String,
-
-    @OneToMany(mappedBy = "profile", cascade = [CascadeType.ALL])
-    var userAddresses: List<UserAddress>? = null
 )

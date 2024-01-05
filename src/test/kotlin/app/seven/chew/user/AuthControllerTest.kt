@@ -1,7 +1,6 @@
 package app.seven.chew.user
 
 import app.seven.chew.user.model.AuthResponse
-import app.seven.chew.user.model.LoginRequest
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk

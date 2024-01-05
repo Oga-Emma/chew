@@ -1,12 +1,7 @@
 package app.seven.chew.user
 
-import app.seven.chew.user.mapper.AuthResponseMapper
-import app.seven.chew.user.mapper.AuthUserMapper
 import app.seven.chew.user.model.AuthResponse
-import app.seven.chew.user.model.AuthUser
-import app.seven.chew.user.model.LoginRequest
 import app.seven.chew.user.model.Session
-import app.seven.chew.user.exception.InvalidCredentialException
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.mockk.every

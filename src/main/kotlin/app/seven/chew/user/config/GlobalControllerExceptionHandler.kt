@@ -1,7 +1,6 @@
 package app.seven.chew.user.config
 
-import app.seven.chew.user.exception.InvalidCredentialException
-import app.seven.chew.user.model.ApiResponse
+import app.seven.chew.user.model.dto.ApiResponse
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
 import org.springframework.core.convert.ConversionFailedException
@@ -29,15 +28,6 @@ class GlobalControllerExceptionHandler {
                 message = "Unknown error",
                 error = ex.message
             ),
-            HttpStatus.BAD_REQUEST
-        )
-    }
-
-    @ExceptionHandler(InvalidCredentialException::class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun handleInvalidCredential(ex: InvalidCredentialException): ResponseEntity<ApiResponse<*>> {
-        return ResponseEntity(
-            ApiResponse.Error(message = "Invalid credential", error = ex.message),
             HttpStatus.BAD_REQUEST
         )
     }
